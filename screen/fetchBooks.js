@@ -1,20 +1,15 @@
 import firestore from '@react-native-firebase/firestore';
 
-export const fetchFreeBooks = async () => {
+export const fetchBooks = async () => {
   try {
-    const booksCollection = await firestore()
-      .collection('books')
-      .where('isFree', '==', true) // Fetch only free books
-      .get();
-
-    const books = booksCollection.docs.map(doc => ({
+    const snapshot = await firestore().collection('books').limit(10).get();
+    const books = snapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data(),
     }));
-
     return books;
   } catch (error) {
-    console.error('Error fetching free books:', error);
+    console.error("Error fetching books:", error);
     return [];
   }
 };
