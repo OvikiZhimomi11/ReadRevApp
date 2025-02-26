@@ -3,10 +3,16 @@ import React from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { getAuth, signOut } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
+import { fetchBooks } from './fetchBooks';
 
-const HomeScreen = () => {
-  const navigation = useNavigation();
+const HomeScreen = () => ({navigation}) => {
+  const [books, setBooks] = useState([]);
   const auth = getAuth();
+
+  useEffect(() => {
+    fetchBooks().then((data) => setBooks(data));
+  },[]);
+
 
   const handleLogout = () => {
     signOut(auth)
@@ -19,7 +25,7 @@ const HomeScreen = () => {
   };
 
   const categories = ['Fiction', 'Non-Fiction', 'Mystery', 'Sci-Fi', 'Fantasy', 'Biography'];
-  const books = [
+  const initialBooks = [
     { id: '1', title: 'The Great Gatsby', category: 'Fiction' },
     { id: '2', title: 'Sapiens', category: 'Non-Fiction' },
     { id: '3', title: 'Sherlock Holmes', category: 'Mystery' },
@@ -27,7 +33,7 @@ const HomeScreen = () => {
     { id: '5', title: 'Harry Potter', category: 'Fantasy' },
     { id: '6', title: 'Steve Jobs', category: 'Biography' },
   ];
-
+  
   return (
     <View style={styles.container}>
       <Text style={styles.welcomeText}>Welcome to ReadRev!</Text>
