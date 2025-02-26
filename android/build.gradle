@@ -1,0 +1,44 @@
+// Added a task to print the build configuration
+task printBuildConfig {
+    doLast {
+        println "Build Tools Version: $buildToolsVersion"
+        println "Min SDK Version: $minSdkVersion"
+        println "Compile SDK Version: $compileSdkVersion"
+        println "Target SDK Version: $targetSdkVersion"
+        println "Kotlin Version: $kotlinVersion"
+        println "NDK Version: $ndkVersion"
+    }
+}
+
+buildscript {
+    ext {
+        buildToolsVersion = findProperty('android.buildToolsVersion') ?: '35.0.0'
+        minSdkVersion = Integer.parseInt(findProperty('android.minSdkVersion') ?: '24')
+        compileSdkVersion = Integer.parseInt(findProperty('android.compileSdkVersion') ?: '35')
+        targetSdkVersion = Integer.parseInt(findProperty('android.targetSdkVersion') ?: '34')
+        kotlinVersion = findProperty('android.kotlinVersion') ?: '1.8.22'
+        ndkVersion = "26.1.10909125"
+    }
+    
+    repositories {
+        google()
+        mavenCentral()
+    }
+    
+    dependencies {
+        classpath('com.android.tools.build:gradle:8.1.0')
+        classpath('com.facebook.react:react-native-gradle-plugin')
+        classpath('org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.20')
+        classpath('com.google.gms:google-services:4.4.2')
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://www.jitpack.io' }
+        maven { url "$rootDir/../node_modules/react-native/android" }
+        maven { url "$rootDir/../node_modules/jsc-android/dist" }
+    }
+}

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "736246244346",
+    "project_id": "read-rev",
+    "storage_bucket": "read-rev.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:736246244346:android:10ce5b3db7c0f3083d3a43",
+        "android_client_info": {
+          "package_name": "com.example.readrev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "736246244346-dhk2puhefjmc7gkq007ab0h89kpi0c5q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMZ5g-a-QSG3N_K8aXSlsPvvdDLHM8Pqc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "736246244346-dhk2puhefjmc7gkq007ab0h89kpi0c5q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "736246244346-150jshmr7irv84eic66e837f579baggd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.readrev"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
