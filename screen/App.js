@@ -5,6 +5,8 @@ import { initializeApp } from 'firebase/app';
 import dynamicLinks from '@react-native-firebase/dynamic-links';
 import { registerRootComponent } from 'expo';
 import { Text, View } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import BookDetails from './screens/BookDetails';
 
 function Welcome() {
   return (
