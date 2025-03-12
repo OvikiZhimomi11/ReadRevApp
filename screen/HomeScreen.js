@@ -1,18 +1,23 @@
 // HomeScreen.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { getAuth, signOut } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import { fetchBooks } from './fetchBooks';
 
-const HomeScreen = () => ({navigation}) => {
+const HomeScreen = () => {
   const [books, setBooks] = useState([]);
   const auth = getAuth();
+  const navigation = useNavigation();
 
   useEffect(() => {
-    fetchBooks().then((data) => setBooks(data));
-  },[]);
+    loadBooks();
+  }, []);
 
+  const loadBooks = async () => {
+    const fetchedBooks = await fetchBooks();
+    setBooks(fetchedBooks);
+  };
 
   const handleLogout = () => {
     signOut(auth)
@@ -25,15 +30,7 @@ const HomeScreen = () => ({navigation}) => {
   };
 
   const categories = ['Fiction', 'Non-Fiction', 'Mystery', 'Sci-Fi', 'Fantasy', 'Biography'];
-  const initialBooks = [
-    { id: '1', title: 'The Great Gatsby', category: 'Fiction' },
-    { id: '2', title: 'Sapiens', category: 'Non-Fiction' },
-    { id: '3', title: 'Sherlock Holmes', category: 'Mystery' },
-    { id: '4', title: 'Dune', category: 'Sci-Fi' },
-    { id: '5', title: 'Harry Potter', category: 'Fantasy' },
-    { id: '6', title: 'Steve Jobs', category: 'Biography' },
-  ];
-  
+
   return (
     <View style={styles.container}>
       <Text style={styles.welcomeText}>Welcome to ReadRev!</Text>
@@ -49,10 +46,13 @@ const HomeScreen = () => ({navigation}) => {
         data={books}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View style={styles.bookItem}>
-            <Text style={styles.bookTitle}>{item.title}</Text>
-            <Text style={styles.bookCategory}>{item.category}</Text>
-          </View>
+          <TouchableOpacity 
+            onPress={() => navigation.navigate('BookDetails', { book: item })}>
+            <View style={styles.bookItem}>
+              <Text style={styles.bookTitle}>{item.title}</Text>
+              <Text style={styles.bookCategory}>{item.category}</Text>
+            </View>
+          </TouchableOpacity>
         )}
       />
       <TouchableOpacity style={styles.button} onPress={handleLogout}>

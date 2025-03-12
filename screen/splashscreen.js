@@ -1,4 +1,3 @@
-// SplashScreen.js
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -8,16 +7,16 @@ const SplashScreen = () => {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      navigation.replace('Login');
-    }, 2000); // Show the splash screen for 2 seconds
+      navigation.replace('Login'); // Navigate to the Login screen after 2 seconds
+    }, 2000);
 
-    return () => clearTimeout(timeout);
+    return () => clearTimeout(timeout); // Clear timeout on component unmount
   }, [navigation]);
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>ReadRev</Text>
-      <ActivityIndicator size="medium" color="#ffffff" />
+      <ActivityIndicator size="large" color="#ffffff" />
     </View>
   );
 };
