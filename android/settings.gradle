@@ -9,7 +9,7 @@ pluginManagement {
         
     }
 }
-
+includeBuild('../node_modules/react-native-gradle-plugin')
 plugins {
     id("com.facebook.react.settings") version "0.76.0" apply false
      // Correct React Native Plugin
